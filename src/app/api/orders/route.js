@@ -1,4 +1,4 @@
-import {isAdmin} from '@/components/isAdmin.js'
+import {isAdmin} from '@/components/authOptions.js'
 import { authOptions } from "@/components/authOptions.js";
 
 import {Order} from "@/models/Order";

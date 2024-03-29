@@ -1,4 +1,4 @@
-import {isAdmin} from '@/components/isAdmin.js'
+import {isAdmin} from '@/components/authOptions.js'
 import {User} from "@/models/User";
 import mongoose from "mongoose";
 
