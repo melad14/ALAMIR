@@ -1,4 +1,4 @@
-import isAdmin from '@/components/isAdmin.js'
+import {isAdmin} from '@/components/isAdmin.js'
 import {MenuItem} from "@/models/MenuItem";
 import mongoose from "mongoose";
 

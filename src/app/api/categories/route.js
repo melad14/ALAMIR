@@ -1,4 +1,4 @@
-import isAdmin from '@/components/isAdmin.js'
+import {isAdmin} from '@/components/isAdmin.js'
 import {Category} from "@/models/Category";
 import mongoose from "mongoose";
 
