@@ -1,8 +1,8 @@
-import { authOptions } from "@/components/authOptions.js";
 import {User} from "@/models/User";
 import {UserInfo} from "@/models/UserInfo";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route.js";
 
 
 

@@ -1,5 +1,4 @@
 'use client';
-
 import UserForm from "@/components/layout/UserForm";
 import UserTabs from "@/components/layout/UserTabs";
 import {useSession} from "next-auth/react";

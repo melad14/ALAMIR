@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { CartContext, cartProductPrice } from '@/components/AppContext';
