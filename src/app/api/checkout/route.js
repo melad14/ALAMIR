@@ -10,7 +10,7 @@ export async function POST(req) {
   mongoose.connect(process.env.MONGO_URL);
 
   const { cartProducts, deliveryOption,tableNumber,address } = await req.json();
-  const {  phone,ontherphone,streetAddress,city}=address
+  const {  phone,ontherphone,streetAddress,city}=address?address:'';
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
 
@@ -65,16 +65,7 @@ export async function POST(req) {
       metadata: { orderId: orderDoc._id.toString() },
       payment_intent_data: {
         metadata: { orderId: orderDoc._id.toString() },
-      },
-      shipping_options: [
-        {
-          shipping_rate_data: {
-            display_name: 'Delivery fee',
-            type: 'fixed_amount',
-            fixed_amount: { amount: 500, currency: 'EGP' },
-          },
-        }
-      ],
+      }
     });
 
     return Response.json(stripeSession.url);

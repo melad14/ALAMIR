@@ -76,8 +76,8 @@ export default function CartPage() {
         });
   
         if (response.ok) {
-          const responseData = await response.json();
-          window.location = responseData.redirectUrl;
+          window.location = await response.json();
+
         } else {
           throw new Error('Failed to process online payment');
         }
