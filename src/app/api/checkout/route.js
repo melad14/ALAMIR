@@ -9,14 +9,15 @@ const stripe = require('stripe')(process.env.STRIPE_SK);
 export async function POST(req) {
   mongoose.connect(process.env.MONGO_URL);
 
-  const { cartProducts, deliveryOption,tableNumber, ...orderDetails } = await req.json();
+  const { cartProducts, deliveryOption,tableNumber,address } = await req.json();
+  const {  phone,ontherphone,streetAddress,city}=address
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
 
   try {
     const orderDoc = await Order.create({
       userEmail,
-      ...orderDetails, 
+      phone,ontherphone,streetAddress,city,
       cartProducts,
       paid: false,
       deliveryOption, 
@@ -29,7 +30,8 @@ export async function POST(req) {
 
       let productPrice = productInfo.basePrice;
       if (cartProduct.size) {
-        const size = productInfo.sizes.find(size => size._id.toString() === cartProduct.size._id.toString());
+        const size = productInfo.sizes
+        .find(size => size._id.toString() === cartProduct.size._id.toString());
         productPrice += size.price;
       }
       if (cartProduct.extras?.length > 0) {
@@ -45,7 +47,7 @@ export async function POST(req) {
       stripeLineItems.push({
         quantity: 1,
         price_data: {
-          currency: 'USD',
+          currency: 'EGP',
           product_data: {
             name: productName,
           },
@@ -58,8 +60,8 @@ export async function POST(req) {
       line_items: stripeLineItems,
       mode: 'payment',
       customer_email: userEmail,
-      success_url: `${process.env.NEXTAUTH_URL}orders/${orderDoc._id}?clear-cart=1`,
-      cancel_url: `${process.env.NEXTAUTH_URL}cart?canceled=1`,
+      success_url: process.env.NEXTAUTH_URL + 'orders/' + orderDoc._id.toString() + '?clear-cart=1',
+      cancel_url: process.env.NEXTAUTH_URL + 'cart?canceled=1',
       metadata: { orderId: orderDoc._id.toString() },
       payment_intent_data: {
         metadata: { orderId: orderDoc._id.toString() },
@@ -69,7 +71,7 @@ export async function POST(req) {
           shipping_rate_data: {
             display_name: 'Delivery fee',
             type: 'fixed_amount',
-            fixed_amount: { amount: 500, currency: 'USD' },
+            fixed_amount: { amount: 500, currency: 'EGP' },
           },
         }
       ],
@@ -77,7 +79,7 @@ export async function POST(req) {
 
     return Response.json(stripeSession.url);
   } catch (error) {
-    // Handle any errors
+    
     console.error("Error processing order:", error);
     console.error("Failed to process order");
     return Response.error("Failed to process order", { status: 500 });

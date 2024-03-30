@@ -9,20 +9,20 @@ export async function POST(req) {
   mongoose.connect(process.env.MONGO_URL);
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
-  const { cartProducts, deliveryOption, tableNumber, ...orderDetails } = await req.json();
+  const { cartProducts, deliveryOption, tableNumber, address} = await req.json();
+  const {  phone,ontherphone,streetAddress,city}=address
 
 
   try {
     const orderDoc = await Order.create({
       userEmail,
-      ...orderDetails,
+      phone,ontherphone,streetAddress,city,
       cartProducts,
       paid: false,
       deliveryOption,
       tableNumber
     });
 
-console.log('orderDoc',orderDoc);
     const redirectUrl = `${process.env.NEXTAUTH_URL}orders/${orderDoc._id}?clear-cart=1`;
 
     return Response.json({ redirectUrl });

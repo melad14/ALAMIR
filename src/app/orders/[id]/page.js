@@ -6,15 +6,16 @@ import CartProduct from "@/components/menu/CartProduct";
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../../LoadingSpinner .js";
 
 export default function OrderPage() {
   const { clearCart } = useContext(CartContext);
   const [order, setOrder] = useState();
-  const [paid, setPaid] = useState(order?.paid||false);
-  const [iscomplete, setIscomplete] = useState(order?.iscomplete||false);
+  const [paid, setPaid] = useState(order?.paid || false);
+  const [iscomplete, setIscomplete] = useState(order?.iscomplete || false);
   const [loadingOrder, setLoadingOrder] = useState(true);
   const { id } = useParams();
-  
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -28,8 +29,8 @@ export default function OrderPage() {
         .then(res => res.json())
         .then(async orderData => {
           setOrder(orderData);
-          setPaid(orderData.paid); // Initialize paid state with order data
-          setIscomplete(orderData.iscomplete); // Initialize iscomplete state with order data
+          setPaid(orderData.paid); 
+          setIscomplete(orderData.iscomplete); 
           setLoadingOrder(false);
         })
         .catch(error => console.error("Error fetching order:", error));
@@ -37,36 +38,36 @@ export default function OrderPage() {
   }, [id]);
 
   const handleIsCompleteChange = () => {
-    setIscomplete(prevState => !prevState); 
+    setIscomplete(prevState => !prevState);
   };
 
   const handlePaidChange = () => {
-    setPaid(prevState => !prevState); 
+    setPaid(prevState => !prevState);
   };
 
   const handleSave = () => {
-    updateOrder({ ...order, iscomplete, paid ,id});
+    updateOrder({ ...order, iscomplete, paid, id });
   };
 
-  async function updateOrder(updatedOrder)  {
+  async function updateOrder(updatedOrder) {
     const savingPromise = new Promise(async (resolve, reject) => {
 
-    const response = await fetch('/api/orders', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatedOrder)
+      const response = await fetch('/api/orders', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedOrder)
+      })
+      if (response.ok)
+        resolve();
+      else reject();
     })
-    if (response.ok)
-    resolve();
-  else reject();
-  })
-  await toast.promise(savingPromise, {
-    loading: 'Saving this order',
-    success: 'Saved',
-    error: 'Error',
-  });
+    await toast.promise(savingPromise, {
+      loading: 'Saving this order',
+      success: 'Saved',
+      error: 'Error',
+    });
   }
 
   let subtotal = 0;
@@ -85,7 +86,7 @@ export default function OrderPage() {
           <p>We will call you when your order will be on the way.</p>
         </div>
       </div>
-      {loadingOrder && <div>Loading order...</div>}
+      {loadingOrder && (<LoadingSpinner />)}
       {order && (
         <div className="grid md:grid-cols-2 md:gap-16">
           <div>
@@ -103,37 +104,38 @@ export default function OrderPage() {
                 <AddressInputs disabled={true} addressProps={order} />
               ) : (
                 <div>
-                <label>Table Number:</label>
-                <input
-                  disabled={true}
-                  type="text"
-                  value={order.tableNumber}
-                />
-                        <div>
-                  <div className="mt-4">
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={iscomplete}
-                        onChange={handleIsCompleteChange}
-                      />
-                       Order Complete
-                    </label>
-                  </div>
-                  <div className="mt-4">
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={paid}
-                        onChange={handlePaidChange}
-                      />
-                       Paid
-                    </label>
-                  </div>
-                  <button className="bg-primary text-white" onClick={handleSave}>Save</button>
-                </div> 
-              </div>
+                  <label>Table Number:</label>
+                  <input
+                    disabled={true}
+                    type="text"
+                    value={order.tableNumber}
+                  />
+
+                </div>
               )}
+              <div>
+                <div className="mt-4">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={iscomplete}
+                      onChange={handleIsCompleteChange}
+                    />
+                    Order Complete
+                  </label>
+                </div>
+                <div className="mt-4">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={paid}
+                      onChange={handlePaidChange}
+                    />
+                    Paid
+                  </label>
+                </div>
+                <button className="bg-primary text-white" onClick={handleSave}>Save</button>
+              </div>
             </div>
           </div>
         </div>

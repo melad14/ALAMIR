@@ -25,9 +25,10 @@ export default function CartPage() {
 
   useEffect(() => {
     if (profileData?.city) {
-      const { phone, streetAddress, city } = profileData;
+      const { phone,ontherphone, streetAddress, city } = profileData;
       const addressFromProfile = {
         phone,
+        ontherphone,
         streetAddress,
         city,
       };
