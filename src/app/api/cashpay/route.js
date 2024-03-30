@@ -10,7 +10,7 @@ export async function POST(req) {
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
   const { cartProducts, deliveryOption, tableNumber, address} = await req.json();
-  const {  phone,ontherphone,streetAddress,city}=address
+  const {  phone,ontherphone,streetAddress,city}=address?address:'';
 
 
   try {
@@ -28,7 +28,6 @@ export async function POST(req) {
     return Response.json({ redirectUrl });
   } catch (error) {
     console.error("Error processing cash payment:", error);
-    console.error("Failed to process cash payment");
     return Response.error("Failed to process cash payment", { status: 500 });
   }
 }
