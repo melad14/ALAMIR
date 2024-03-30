@@ -5,6 +5,7 @@ import {useProfile} from "@/components/UseProfile";
 import {useParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
+import LoadingSpinner from './../../LoadingSpinner ';
 
 export default function EditUserPage() {
   const {loading, data} = useProfile();
@@ -41,7 +42,7 @@ export default function EditUserPage() {
   }
 
   if (loading) {
-    return 'Loading user profile...';
+    return <LoadingSpinner />
   }
 
   if (!data.admin) {

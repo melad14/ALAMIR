@@ -7,19 +7,21 @@ import {useEffect, useState} from "react";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
-  const [loadingOrders, setLoadingOrders] = useState(true);
   const {loading, data:profile} = useProfile();
 
   useEffect(() => {
     fetchOrders();
+       // Set up interval to fetch orders every two seconds
+       const intervalId = setInterval(fetchOrders, 4000);
+
+       // Clear interval on component unmount
+       return () => clearInterval(intervalId);
   }, []);
 
   function fetchOrders() {
-    setLoadingOrders(true);
     fetch('/api/orders').then(res => {
       res.json().then(orders => {
         setOrders(orders.reverse());
-        setLoadingOrders(false);
       })
     })
   }
@@ -28,9 +30,7 @@ export default function OrdersPage() {
     <section className="mt-8 max-w-2xl mx-auto">
       <UserTabs isAdmin={profile.admin} />
       <div className="mt-8">
-        {loadingOrders && (
-          <div>Loading orders...</div>
-        )}
+        
         {orders?.length > 0 && orders.map(order => (
           <div
             key={order._id}

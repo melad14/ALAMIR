@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { CartContext } from './../AppContext';
-import FlyingButton from 'react-flying-item'
 import MenuItemTile from "./MenuItemTile.js";
 import { useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation'
@@ -117,15 +116,11 @@ export default function MenuItem(menuItem) {
                   ))}
                 </div>
               )}
-              <FlyingButton
-                targetTop={'5%'}
-                targetLeft={'95%'}
-                src={image}>
-                <div className="primary sticky bottom-2"
+        
+                <button type="button" className="bg-primary text-white rounded-full  sticky bottom-2"
                   onClick={handleAddToCartButtonClick}>
                   Add to cart {selectedPrice} EGP
-                </div>
-              </FlyingButton>
+                </button>
               <button
                 className="mt-2"
                 onClick={() => setShowPopup(false)}>

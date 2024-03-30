@@ -7,6 +7,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../../LoadingSpinner .js";
 
 export default function NewMenuItemPage() {
 
@@ -41,7 +42,7 @@ export default function NewMenuItemPage() {
   }
 
   if (loading) {
-    return 'Loading user info...';
+    return <LoadingSpinner />
   }
 
   if (!data.admin) {

@@ -3,6 +3,7 @@ import UserTabs from "@/components/layout/UserTabs";
 import {useProfile} from "@/components/UseProfile";
 import Link from "next/link";
 import {useEffect, useState} from "react";
+import LoadingSpinner from "../LoadingSpinner .js";
 
 export default function UsersPage() {
 
@@ -18,7 +19,7 @@ export default function UsersPage() {
   }, []);
 
   if (loading) {
-    return 'Loading user info...';
+    return <LoadingSpinner />
   }
 
   if (!data.admin) {

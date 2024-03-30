@@ -5,6 +5,7 @@ import {useProfile} from "@/components/UseProfile";
 import Image from "next/image";
 import Link from "next/link";
 import {useEffect, useState} from "react";
+import LoadingSpinner from "../LoadingSpinner .js";
 
 export default function MenuItemsPage() {
 
@@ -20,7 +21,7 @@ export default function MenuItemsPage() {
   }, []);
 
   if (loading) {
-    return 'Loading user info...';
+    return <LoadingSpinner />
   }
 
   if (!data.admin) {

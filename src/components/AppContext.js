@@ -51,6 +51,7 @@ export default function AppProvider({children}) {
       ls.setItem('cart', JSON.stringify(cartProducts));
     }
   }
+  
 
   function addToCart(product, size=null, extras=[]) {
     setCartProducts(prevProducts => {
@@ -59,13 +60,14 @@ export default function AppProvider({children}) {
       saveCartProductsToLocalStorage(newProducts);
       return newProducts;
     });
+    toast.success('product added to cart')
   }
 
   return (
     <SessionProvider>
       <CartContext.Provider value={{
         cartProducts, setCartProducts,
-        addToCart, removeCartProduct, clearCart,
+        addToCart, removeCartProduct, clearCart
       }}>
         {children}
       </CartContext.Provider>

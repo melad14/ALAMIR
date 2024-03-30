@@ -2,20 +2,27 @@
 import SectionHeaders from "@/components/layout/SectionHeaders";
 import MenuItem from "@/components/menu/MenuItem";
 import {useEffect, useState} from "react";
+import LoadingSpinner from "../LoadingSpinner .js";
 
 export default function MenuPage() {
   const [categories, setCategories] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); 
+
   useEffect(() => {
     fetch('/api/categories').then(res => {
       res.json().then(categories => setCategories(categories))
     });
     fetch('/api/menu-items').then(res => {
       res.json().then(menuItems => setMenuItems(menuItems));
+      setIsLoading(false)
     });
   }, []);
   return (
     <section className="mt-8">
+      {isLoading && (
+        <LoadingSpinner />
+        )}
       {categories?.length > 0 && categories.map(c => (
         <div key={c._id}>
           <div className="text-center">

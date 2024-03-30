@@ -5,6 +5,7 @@ import {useSession} from "next-auth/react";
 import {redirect} from "next/navigation";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../LoadingSpinner .js";
 
 export default function ProfilePage() {
   const session = useSession();
@@ -21,6 +22,7 @@ export default function ProfilePage() {
           setUser(data);
           setIsAdmin(data.admin);
           setProfileFetched(true);
+
         })
       });
     }
@@ -50,7 +52,8 @@ export default function ProfilePage() {
   }
 
   if (status === 'loading' || !profileFetched) {
-    return 'Loading...';
+    return <LoadingSpinner />
+
   }
 
   if (status === 'unauthenticated') {

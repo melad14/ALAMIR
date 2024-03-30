@@ -4,6 +4,7 @@ import UserTabs from "@/components/layout/UserTabs";
 import {useEffect, useState} from "react";
 import {useProfile} from "@/components/UseProfile";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../LoadingSpinner .js";
 
 export default function CategoriesPage() {
 
@@ -75,7 +76,8 @@ export default function CategoriesPage() {
   }
 
   if (profileLoading) {
-    return 'Loading user info...';
+    return <LoadingSpinner />
+
   }
 
   if (!profileData.admin) {
