@@ -17,6 +17,7 @@ export default function EditMenuItemPage() {
   const [menuItem, setMenuItem] = useState(null);
   const [redirectToItems, setRedirectToItems] = useState(false);
   const {loading, data} = useProfile();
+  const {isloading, setIsloading} = useState(true);
 
 useEffect(() => {
   const fetchMenuItem = async () => {
@@ -26,8 +27,9 @@ useEffect(() => {
         throw new Error('Failed to fetch menu items');
       }
       const items = await response.json();
-      const item = items.find(i => i._id === id);
+      const item = await items.find(i => i._id === id);
       setMenuItem(item);
+      setIsloading(false)
     } catch (error) {
       console.error('Error fetching menu item:', error);
       // Handle error if necessary
@@ -84,7 +86,7 @@ useEffect(() => {
     return redirect('/menu-items');
   }
 
-  if (loading) {
+  if (isloading) {
     return <LoadingSpinner />
   }
 
