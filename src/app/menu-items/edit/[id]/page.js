@@ -17,7 +17,6 @@ export default function EditMenuItemPage() {
   const [menuItem, setMenuItem] = useState(null);
   const [redirectToItems, setRedirectToItems] = useState(false);
   const {loading, data} = useProfile();
-  const {isloading, setIsloading} = useState(true);
 
 useEffect(() => {
   const fetchMenuItem = async () => {
@@ -29,7 +28,6 @@ useEffect(() => {
       const items = await response.json();
       const item = await items.find(i => i._id === id);
       setMenuItem(item);
-      setIsloading(false)
     } catch (error) {
       console.error('Error fetching menu item:', error);
       // Handle error if necessary
