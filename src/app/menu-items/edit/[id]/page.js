@@ -18,14 +18,24 @@ export default function EditMenuItemPage() {
   const [redirectToItems, setRedirectToItems] = useState(false);
   const {loading, data} = useProfile();
 
-  useEffect(() => {
-    fetch('/api/menu-items').then(res => {
-      res.json().then(items => {
-        const item = items.find(i => i._id === id);
-        setMenuItem(item);
-      });
-    })
-  }, []);
+useEffect(() => {
+  const fetchMenuItem = async () => {
+    try {
+      const response = await fetch('/api/menu-items');
+      if (!response.ok) {
+        throw new Error('Failed to fetch menu items');
+      }
+      const items = await response.json();
+      const item = items.find(i => i._id === id);
+      setMenuItem(item);
+    } catch (error) {
+      console.error('Error fetching menu item:', error);
+      // Handle error if necessary
+    }
+  };
+
+  fetchMenuItem();
+}, []);
 
   async function handleFormSubmit(ev, data) {
     ev.preventDefault();
