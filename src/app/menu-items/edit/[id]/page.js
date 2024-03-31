@@ -86,7 +86,7 @@ useEffect(() => {
     return redirect('/menu-items');
   }
 
-  if (isloading) {
+  if (loading&&isloading) {
     return <LoadingSpinner />
   }
 
