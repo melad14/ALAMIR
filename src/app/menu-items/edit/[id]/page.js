@@ -86,9 +86,8 @@ useEffect(() => {
     return redirect('/menu-items');
   }
 
-  if (loading&&isloading) {
-    return <LoadingSpinner />
-  }
+  if (loading)  return <LoadingSpinner />
+  
 
   if (!data.admin) {
     return 'Not an admin.';
