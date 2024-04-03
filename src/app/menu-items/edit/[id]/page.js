@@ -9,6 +9,7 @@ import {redirect, useParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../../../LoadingSpinner .js";
+import axios from "axios";
 
 export default function EditMenuItemPage() {
 
@@ -16,26 +17,23 @@ export default function EditMenuItemPage() {
 
   const [menuItem, setMenuItem] = useState(null);
   const [redirectToItems, setRedirectToItems] = useState(false);
+  const [isloading, setIsloading] = useState(true);
+
   const {loading, data} = useProfile();
 
-useEffect(() => {
-  const fetchMenuItem = async () => {
-    try {
-      const response = await fetch('/api/menu-items');
-      if (!response.ok) {
-        throw new Error('Failed to fetch menu items');
-      }
-      const items = await response.json();
-      const item = await items.find(i => i._id === id);
+  useEffect(() => {
+    axios.get('/api/menu-items')
+    .then(response => {
+      const items = response.data;
+      const item = items.find(i => i._id === id);
       setMenuItem(item);
-    } catch (error) {
-      console.error('Error fetching menu item:', error);
-      // Handle error if necessary
-    }
-  };
+      setIsloading(false)
+    })
+    .catch(error => {
+      console.error('Error fetching menu items:', error);
+    });
+  }, []);
 
-  fetchMenuItem();
-}, []);
 
   async function handleFormSubmit(ev, data) {
     ev.preventDefault();
@@ -84,7 +82,7 @@ useEffect(() => {
     return redirect('/menu-items');
   }
 
-  if (loading)  return <LoadingSpinner />
+  if (isloading)  return <LoadingSpinner />
   
 
   if (!data.admin) {
@@ -100,15 +98,21 @@ useEffect(() => {
           <span>Show all menu items</span>
         </Link>
       </div>
-      <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit} />
-      <div className="max-w-md mx-auto mt-2">
-        <div className="max-w-xs ml-auto pl-4">
-          <DeleteButton
-            label="Delete this menu item"
-            onDelete={handleDeleteClick}
-          />
-        </div>
+      {menuItem && (
+  <>
+    <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit} />
+    <div className="max-w-md mx-auto mt-2">
+      <div className="max-w-xs ml-auto pl-4">
+        <DeleteButton
+          label="Delete this menu item"
+          onDelete={handleDeleteClick}
+        />
       </div>
+    </div>
+  </>
+)}
+
+      
     </section>
   );
 }
