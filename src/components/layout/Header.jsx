@@ -45,7 +45,7 @@ export default function Header() {
     userName = userName.split(' ')[0];
   }
   return (
-    <header>
+    <header className="sticky top-0 bg-white z-50 mb-2 shadow p-3">
       <div className="flex items-center md:hidden justify-between">
         <Link className="text-primary font-semibold text-2xl" href={'/'}>
           Lamera 
