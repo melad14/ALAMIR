@@ -43,7 +43,14 @@ export default function OrdersPage() {
                 }>
                   {order.paid ? 'Paid' : 'Not paid'}
                 </div>
+                
               </div>
+              <div className={
+                  (order.iscomplete ? 'bg-green-500' : 'bg-red-400')
+                  + ' p-2 rounded-md text-white w-24 text-center'
+                }>
+                  {order.iscomplete ? 'complete' : 'Not complete'}
+                </div>
               <div className="grow">
                 <div className="flex gap-2 items-center mb-1">
                   <div className="grow">{order.userEmail}</div>
