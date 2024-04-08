@@ -5,7 +5,10 @@ import {dbTimeForHuman} from "@/libs/datetime";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 
+
 export default function OrdersPage() {
+    
+
   const [orders, setOrders] = useState([]);
   const {loading, data:profile} = useProfile();
 
@@ -28,7 +31,7 @@ export default function OrdersPage() {
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
-      <UserTabs isAdmin={profile.admin} />
+      <UserTabs isA dmin={profile.admin} />
       <div className="mt-8">
         
         {orders?.length > 0 && orders.map(order => (

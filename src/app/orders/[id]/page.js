@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import LoadingSpinner from "../../LoadingSpinner .js";
+import { useProfile } from './../../../components/UseProfile';
 
 export default function OrderPage() {
   const { clearCart } = useContext(CartContext);
@@ -14,6 +15,8 @@ export default function OrderPage() {
   const [paid, setPaid] = useState(order?.paid || false);
   const [iscomplete, setIscomplete] = useState(order?.iscomplete || false);
   const [loadingOrder, setLoadingOrder] = useState(true);
+  const {loading, data:profile} = useProfile();
+
   const { id } = useParams();
 
 
@@ -113,7 +116,8 @@ export default function OrderPage() {
 
                 </div>
               )}
-              <div>
+              {profile.admin &&(
+                <div>
                 <div className="mt-4">
                   <label>
                     <input
@@ -136,6 +140,8 @@ export default function OrderPage() {
                 </div>
                 <button className="bg-primary text-white" onClick={handleSave}>Save</button>
               </div>
+              )}
+              
             </div>
           </div>
         </div>
