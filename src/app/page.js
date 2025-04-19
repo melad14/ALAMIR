@@ -19,19 +19,19 @@ export default function Home() {
             <div className="text-gray-500 max-w-md mx-auto mt-4 flex flex-col gap-4">
               <div className='flex justify-center  flex items-center gap-2'>
                 <h3 className="text-primary text-2xl">
-                  أرقى سلسلة مطاعم وكافيهات في بني سويف
+                تاج الشاورما في بني سويف ملك للأمير
                 </h3>
                 <Left />
               </div>
               <div className='flex justify-center  flex items-center gap-2'>
                 <h3 className="text-primary text-2xl">
-                  لاميرا كورنيش النيل - بجوار مطعم برانشز
+                  الامـيـر كورنيـش النـيـل - بــجـوار بـلـبن
                 </h3>
                 <Left />
               </div>
               <div className='flex justify-center flex items-center gap-2'>
                 <h3 className="text-primary text-2xl">
-                لاميرا شرق النيل - امام كليه تعليم صناعي
+                الامير شرق النيل - امام كليه تعليم صناعي
                 </h3>
                 <Left />
               </div>
@@ -51,7 +51,7 @@ export default function Home() {
         />
         <div className="mt-8">
           <a className="text-4xl underline text-gray-500" href="tel:+46738123123">
-            +20 1010003323
+          012 00050106
           </a>
         </div>
       </section>
