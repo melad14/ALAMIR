@@ -8,17 +8,18 @@ export default function Hero() {
       <div className="py-8 md:py-12 ">
         <h1 className="text-4xl font-semibold">
           <span className="text-primary">
-            ALAMIR
+          PABLO
           </span><br />
           <span className="text-3xl text-secondary">
-          Beni Suef’s shawarma <br />
+          Beni Suef’s broast  <br />
           crown belongs <br />
-        to El Amir&nbsp;
+        to PABLO&nbsp;
           </span>
        
         </h1>
         <p className="my-6 text-gray-500 ">
-        تاج الشاورما في بني سويف ملك للأمير     </p>
+        كينج البروست
+        </p>
         <div className="flex gap-4 text-sm">
           <button className="flex justify-center bg-primary uppercase flex items-center gap-2 text-white px-4 py-2 rounded-full">
           <Link href={'/menu'}>order now</Link>
@@ -33,7 +34,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="relative hidden md:block justify-end pl-12 ml-12 pt-12 ">
-  <Image src="/1.jpg" width={250} height={250} alt="pizza" />
+  <Image src="/1.jpg" width={200} height={200} alt="pizza" />
 </div>
 
 

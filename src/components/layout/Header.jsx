@@ -48,7 +48,7 @@ export default function Header() {
     <header className="sticky top-0 bg-white z-50 mb-2 shadow p-3">
       <div className="flex items-center md:hidden justify-between">
         <Link className="text-primary font-semibold text-2xl" href={'/'}>
-          ALAMIR 
+          PABLO 
         </Link>
         <div className="flex gap-8 items-center">
           <Link href={'/cart'} className="relative">
@@ -80,7 +80,7 @@ export default function Header() {
       <div className="hidden md:flex items-center justify-between">
         <nav className="flex items-center gap-8 text-gray-500 font-semibold">
           <Link className="text-primary font-semibold text-2xl" href={'/'}>
-            ALAMIR
+          PABLO
           </Link>
           <Link href={'/'}>Home</Link>
           <Link href={'/menu'}>Menu</Link>

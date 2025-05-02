@@ -15,31 +15,27 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 my-5">
 
-          <div className="col-span-1">
+          <div className="col-span-1 flex justify-center items-center">
             <div className="text-gray-500 max-w-md mx-auto mt-4 flex flex-col gap-4">
               <div className='flex justify-center  flex items-center gap-2'>
                 <h3 className="text-primary text-2xl">
-                تاج الشاورما في بني سويف ملك للأمير
-                </h3>
+                كينج البروست في بني سويف
+
+</h3>
                 <Left />
               </div>
               <div className='flex justify-center  flex items-center gap-2'>
                 <h3 className="text-primary text-2xl">
-                  الامـيـر كورنيـش النـيـل - بــجـوار بـلـبن
+                بابلو كورنيـش النـيـل - بــجـوار طيبة
                 </h3>
                 <Left />
               </div>
-              <div className='flex justify-center flex items-center gap-2'>
-                <h3 className="text-primary text-2xl">
-                الامير شرق النيل - امام كليه تعليم صناعي
-                </h3>
-                <Left />
-              </div>
+          
 
             </div>
           </div>
-          <div className="col-span-1">
-        <Image src="/4.png" alt="Image 1" width={400} height={200} />
+          <div className="col-span-1  flex justify-center items-center">
+        <Image src="/4.png" alt="Image 1" width={300} height={150}  />
       </div>
         </div>
 
@@ -50,8 +46,8 @@ export default function Home() {
           mainHeader={'Contact us'}
         />
         <div className="mt-8">
-          <a className="text-4xl underline text-gray-500" href="tel:+46738123123">
-          012 00050106
+          <a className="text-4xl underline text-gray-500" href="tel:+010 04009556">
+          010 04009556
           </a>
         </div>
       </section>
